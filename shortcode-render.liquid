@@ -1,0 +1,49 @@
+{% assign available_sizes = "" %}
+{% assign available_colours = "" %}
+{%for option in product.options_with_values %}
+  {% if option.name == 'Size' %}
+	{% for value in option.values %}
+      {% capture available_sizes %}
+          {{ available_sizes }} {{value | handleize}}
+      {% endcapture%}
+	{%endfor%}
+  {%endif%}
+  {% if option.name == 'Colour'%}
+	{% for value in option.values %}
+      {% capture available_colours %}
+          {{ available_colours }} {{value | handleize}}
+      {% endcapture%}
+	{%endfor%}
+  {%endif%}
+{%endfor%}
+{%assign unique_sizes = available_sizes | split: ' ' | uniq | join: ' '%}
+{%assign unique_colours = available_colours | split: ' ' | uniq | join: ' '%}
+<li style="margin-left:0" data-byselling="{{forloop.index}}" data-byprice="{{product.variants.first.price}}" 
+    class="mix thumb {{product.vendor | handleize}} 
+           {%for tag in product.tags%}{%assign a = tag|handleize%}
+           	{%if a contains 'filter'%}{{tag|handleize|remove:'filter:'}} {%endif%} 
+           	{%if a contains 'rated'%}{{tag|handleize|remove:'rated:'}} {%endif%}
+           {%endfor%}
+           {{unique_sizes}}
+           {{unique_colours}}
+           collectionItem">
+<a class="trn24 bshdw" href="{{product.url}}">
+  <div class="imageWrap">
+    <div class="bs sw" data-aspect="1.2" data-img="{{ product.images.first.src | img_url: '320x320' }}" data-alt="img:{{product.title}}"></div>
+  </div>
+  <div class="prodMeta">
+    <div class="table">
+      <div class="cell">
+        <p class="prodtitle">{{product.title}}</p>
+                <span class="productPrice" style="padding:0 !important">
+    {{product.variants.price|money}}{%include 'productPrice'%}</span>
+  <!-- TrustBox widget - Product Mini MultiSource -->
+      <div class="trustpilot-widget" data-locale="en-GB" data-template-id="577258fb31f02306e4e3aaf9" data-businessunit-id="59e9fc590000ff0005ae2b23" data-style-height="20px" data-style-width="100%" data-theme="light" data-sku="{{ product.handle}}ALL,{{ product.variants | map: 'sku' | join: "," }}">
+           </div> <!-- End TrustBox widget -->  
+        
+
+      </div>
+    </div>
+  </div>
+</a>
+</li>

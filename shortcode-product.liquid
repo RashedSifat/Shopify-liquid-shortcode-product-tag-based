@@ -1,0 +1,23 @@
+{% capture productHandle %}	
+    {% include 'shortcode-render' render:'name' %}
+{% endcapture %}
+
+<div class=""> 
+<ul id="" class="collectionListing collectionGrid thumbGrid row">
+  <span data-colelction-title="{{collection.handle}}" data-collection-count="{{collection.all_products_count }}" class="pagniate hidden"></span>
+
+{% assign spec = productHandle %}
+
+{% paginate collections.all.products by 10000 %}
+{% for product in collections.all.products %}
+  	{% assign i = 0 %}
+  	{% for tag in product.tags %}
+		{% if spec contains tag and i == 0 %}
+      		{%include 'ShortcodeTemplate'%}
+  			{% assign i = 1 %}
+  		{% endif %}
+	{% endfor %}
+{% endfor %}
+{% endpaginate %}
+</ul>
+</div>
