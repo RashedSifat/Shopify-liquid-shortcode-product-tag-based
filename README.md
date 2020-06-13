@@ -31,9 +31,10 @@ In "shortcode-product.liquid" files the code start with:
 </pre></code>
 
 
-From the shortcode [product name="T-shart"], it capture the name for example "T-shirt". The "productHandle" is assigned to "spec" 
+From the shortcode [product name="T-shart"], the above code captures the "name" for example "T-shirt". 
 
 <pre><code>{% assign spec = productHandle %}</pre></code>
+The "productHandle" is assigned to "spec". <br/>
 
 <code><pre> {% paginate collections.all.products by 10000 %}</code></pre> Pagination is used to go through the 10000 products as default it can be grab only 50 products.
 
