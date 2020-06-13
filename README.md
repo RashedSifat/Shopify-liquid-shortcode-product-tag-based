@@ -1,7 +1,8 @@
 # Shopify-liquid-shortcode-product-tag-based
 Developed the product shortcode to use in shopify pages, blogs, collection pages to show the products filtered by its Product Tags.
 
-<h4>Example:</h4> [product name="T-shart"]
+<h4>Example:</h4>
+<pre><code> [product name="T-shart"] </pre></code>
 
 The above shortcode can be used in collection pages, pages, blogs from Shopify admin in HTML format. The shortcode retreive all the product which contain the tag "T-shirt".
 
@@ -21,17 +22,20 @@ shortcodeTemplate.liquid<br/>
 
 
 No need to edit the shortcode.liquid and shortcode-render.liquid files. 
-In shortcode-product.liquid files the code start with:
+In "shortcode-product.liquid" files the code start with:
 
 
 <pre><code>{% capture productHandle %}<br/>	
     {% include 'shortcode-render' render:'name' %}<br/>
 {% endcapture %}<br/>
-</code></pre>
+</pre></code>
 
 
-From the shortcode [product name="T-shart"], it capture the name for example "T-shirt". Then the productHandle is assigned as "spec" {% assign spec = productHandle %}
-Here, <code><pre>{% paginate collections.all.products by 10000 %}</code></pre> is used to go through the 10000 products as default it can be grab only 50 products.
+From the shortcode [product name="T-shart"], it capture the name for example "T-shirt". The "productHandle" is assigned to "spec" 
+
+<pre><code>{% assign spec = productHandle %}</pre></code>
+
+<code><pre> {% paginate collections.all.products by 10000 %}</code></pre> Pagination is used to go through the 10000 products as default it can be grab only 50 products.
 
 
 Then the bellow code is used to retreive the products from all collection which contains the Required Tag.
